@@ -1,0 +1,17 @@
+,Ch1: into_male_cage Significant Cells,Ch2: dart Significant Cells,Mixed Selective Cells,choice_probability,sig_thresh
+0,0.0,1.0,2.0,1.0,0.75
+1,8.0,4.0,3.0,0.21882086167800452,inf
+2,9.0,13.0,5.0,0.5827664399092971,inf
+3,10.0,inf,6.0,0.37755102040816324,inf
+4,11.0,inf,7.0,0.06462585034013606,inf
+5,12.0,inf,inf,0.29365079365079366,inf
+6,14.0,inf,inf,0.2687074829931973,inf
+7,15.0,inf,inf,0.626984126984127,inf
+8,inf,inf,inf,0.9875283446712018,inf
+9,inf,inf,inf,1.0,inf
+10,inf,inf,inf,0.9523809523809523,inf
+11,inf,inf,inf,0.9229024943310657,inf
+12,inf,inf,inf,0.9523809523809524,inf
+13,inf,inf,inf,0.11678004535147392,inf
+14,inf,inf,inf,0.909297052154195,inf
+15,inf,inf,inf,0.929705215419501,inf
