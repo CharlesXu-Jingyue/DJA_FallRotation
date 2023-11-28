@@ -25,17 +25,17 @@ load(filepath2);
 neuralData = trace;
 
 % z-score neural data
-neuralDataPreprocessed = (neuralData - mean(neuralData, 2)) ./ std(neuralData, 0, 2);
+% neuralData = (neuralData - mean(neuralData, 2)) ./ std(neuralData, 0, 2);
 
 % Smooth neural data
 smoothWin = 20;
-[neuralDataPreprocessed, ~] = smoothdata(neuralDataPreprocessed, 2, 'movmean', smoothWin);
+[neuralDataPreprocessed, ~] = smoothdata(neuralData, 2, 'movmean', smoothWin);
 
 %% Save preprocessed variables to .mat file in the same directory
 [path, name, ext] = fileparts(filepath1);
-name_parts = strsplit(name, '_');
-name_parts = name_parts(1:end-1);
-name = strjoin(name_parts, '_');
+% name_parts = strsplit(name, '_');
+% name_parts = name_parts(1:end-1);
+% name = strjoin(name_parts, '_');
 filepath_preprocessed = fullfile(path, [name '_preprocessed' ext]);
 
 save(filepath_preprocessed, 'behaviorDataPreprocessed', 'behaviorLabelsPreprocessed', 'stimuliDataPreprocessed', 'stimuliLabelsPreprocessed', 'neuralData', 'neuralDataPreprocessed');
