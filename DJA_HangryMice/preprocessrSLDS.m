@@ -135,3 +135,17 @@ filepath_preprocessed = fullfile(path, [name '_rSLDS' ext]);
 
 save(filepath_preprocessed, 'collapsedBehaviorData', 'neuralDataPreprocessed');
 
+%% Process EG1-4 fasted male1
+% Import EG1-4_fasted_rSLDS.mat
+% Slice array to include all frames before second male entrance
+neuralDataPreprocessed = neuralDataPreprocessed(:, 1:8153);
+collapsedBehaviorData = collapsedBehaviorData(:, 1:8153);
+
+% Save preprocessed variables to .mat file in the same directory
+[path, name, ext] = fileparts(filepath1);
+name_parts = strsplit(name, '_');
+name_parts = name_parts(1:end-1);
+name = strjoin(name_parts, '_');
+filepath_preprocessed = fullfile(path, [name '_male1_rSLDS' ext]);
+
+save(filepath_preprocessed, 'collapsedBehaviorData', 'neuralDataPreprocessed');

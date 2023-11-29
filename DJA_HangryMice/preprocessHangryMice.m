@@ -22,11 +22,70 @@ behaviorData = behaviorFullMaFPS;
 behaviorLabels = behaviorNames;
 stimuliData = stimFullMaFPS;
 stimuliLabels = stimNames;
-neuralData = neural_ref;
 
 clearvars -except filepath behaviorData behaviorLabels stimuliData stimuliLabels neuralData
 
-%% Manually process behavioral data and labels
+%% Manually process behavioral data and labels, M1
+% Rename behavior labels
+behaviorLabels = {'attack';'eating';'food_approach';'food_sniff';'introduction';'sniffM';'drinking'};
+behaviorData = [behaviorData(1:5, :); behaviorData(7:end, :)];
+% Manually define labels to align to
+behaviorLabelsGrouped = {'baseline', ... % Baseline
+                         'introduction', ... % Novelty
+                         'sniffM', 'attack', ... % Male
+                         'food_approach', 'food_sniff', 'eating', 'drinking', ... % Food
+                         };
+groupIndices = [1; 2; 4; 8]; % Indices of the first behavior in each group
+
+behaviorLabelsPreprocessed = cell(size(behaviorLabelsGrouped, 2), 1); % Preallocate
+behaviorLabelsPreprocessed(1:length(behaviorLabels)) = behaviorLabels; % Insert existing labels
+behaviorDataPreprocessed = zeros(length(behaviorLabelsGrouped), size(behaviorData, 2)); % Preallocate
+behaviorDataPreprocessed(1:length(behaviorLabels), :) = behaviorData; % Insert existing data
+
+% Check for missing labels in behaviorLabels compared to behaviorLabelsGrouped
+missingLabels = setdiff(behaviorLabelsGrouped, behaviorLabels);
+
+% If any missing labels exist
+if ~isempty(missingLabels)
+    % For each missing label
+    for i = 1:length(missingLabels)
+        % Add it to the end of behaviorLabels
+        behaviorLabelsPreprocessed(length(behaviorLabels)+i) = missingLabels(i); %#ok<*AGROW>
+        
+        % Add a row of zeros to the bottom of behaviorData
+        behaviorDataPreprocessed(length(behaviorLabels)+i, :) = zeros(1, size(behaviorData, 2));
+    end
+end
+
+% Reorder behaviorLabels and the rows of behaviorData according to the order of labels in behaviorLabelsGrouped
+[~, sorted_indices] = ismember(behaviorLabelsGrouped, behaviorLabelsPreprocessed);
+behaviorLabelsPreprocessed = behaviorLabelsPreprocessed(sorted_indices);
+behaviorDataPreprocessed = behaviorDataPreprocessed(sorted_indices, :);
+
+% Set baseline values
+firstBehaviorIdx = find(any(behaviorData, 1), 1, 'first'); % Find the index of the first behavior
+baseline = zeros(1, size(behaviorData, 2)); % Initialize baseline_fasted as zeros
+baseline(firstBehaviorIdx-1200:firstBehaviorIdx-1) = 1; % Set the baseline to be 2 minutes before the first behavior
+[~, baselineWhere] = ismember("baseline", behaviorLabelsPreprocessed);
+behaviorDataPreprocessed(baselineWhere, :) = baseline;
+
+clearvars -except filepath behaviorDataPreprocessed behaviorLabelsPreprocessed stimuliData stimuliLabels neuralData
+
+%% Manually process stimuli data and labels
+% Degenerate stimuli labels (fasted)
+stimuliLabelsPreprocessed = {'baseline'; 'male'; 'food'};
+firstBehaviorIdx = find(any(stimuliData, 1), 1, 'first'); % Find the index of the first behavior
+baselineStim = zeros(1, size(stimuliData, 2)); % Initialize baseline_fasted as zeros
+baselineStim(1:firstBehaviorIdx-1) = 1; % Set the baseline to be all before the first behavior
+
+stimuliDataPreprocessed = zeros(size(stimuliLabelsPreprocessed, 1), size(stimuliData, 2));
+stimuliDataPreprocessed(1, :) = baselineStim; % "baseline"
+stimuliDataPreprocessed(2, :) = stimuliData(4, :) | stimuliData(5, :); % "male"
+stimuliDataPreprocessed(3, :) = stimuliData(5, :) | stimuliData(1, :); % "food"
+
+clearvars -except filepath behaviorDataPreprocessed behaviorLabelsPreprocessed stimuliDataPreprocessed stimuliLabelsPreprocessed neuralData
+
+%% Manually process behavioral data and labels, M2
 % Manually define labels to align to
 behaviorLabelsGrouped = {'baseline', ... % Baseline
                          'danglingM', 'introduction', ... % Novelty
