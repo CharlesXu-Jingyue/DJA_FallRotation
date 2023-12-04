@@ -166,5 +166,5 @@ filepath_preprocessed = fullfile(path, [name '_preprocessed' ext]);
 save(filepath_preprocessed, 'behaviorDataPreprocessed', 'behaviorLabelsPreprocessed', 'stimuliDataPreprocessed', 'stimuliLabelsPreprocessed', 'neuralData', 'neuralDataPreprocessed');
 
 %%
-filepath_preprocessed = fullfile('/Users/alveus/Documents/WorkingDirectory/LocalRepository/DJA_FallRotation/DJA_HangryMice/data', 'EG1-4_fasted_unreg_male1_preprocessed_use.mat');
+filepath_preprocessed = fullfile('/Users/alveus/Documents/WorkingDirectory/LocalRepository/DJA_FallRotation/DJA_HangryMice/data', 'M2_fasted_unreg_male1_preprocessed.mat');
 save(filepath_preprocessed, 'behaviorDataPreprocessed', 'behaviorLabelsPreprocessed', 'stimuliDataPreprocessed', 'stimuliLabelsPreprocessed', 'neuralData', 'neuralDataPreprocessed');
