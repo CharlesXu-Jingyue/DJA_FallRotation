@@ -38,8 +38,10 @@ sys.path.append('replace/with/path/to/ssm')
 ## Data
 
 The 'DJA_HangryMice/data' folder contains most of the necessary processed data files in .mat format. Some important ones are:
-- M1_fasted_unreg_preprocessed.mat: Unregistered dataset for EG-1, on fasted day, processed for clustering/GLM
-- M2_fasted_unreg_male1_preprocessed.mat: Unregistered dataset for EG1-4, on fasted day, first male intruder only, processed for clustering/GLM
+- M1_fasted_unreg_preprocessed.mat: Unregistered dataset for EG-1, on fasted day, without drinking, processed for clustering/GLM
+- M2_fasted_unreg_male1_preprocessed.mat: Unregistered dataset for EG1-4, on fasted day, without drinking, first male intruder only, processed for clustering/GLM
+- EG1-1_fasted_unreg_preprocessed_use.mat: Unregistered dataset for EG-1, on fasted day, processed for clustering/GLM
+- EG1-4_fasted_unreg_male1_preprocessed_use.mat: Unregistered dataset for EG1-4, on fasted day, first male intruder only, processed for clustering/GLM
 - EG1-4_fasted_unreg_preprocessed.mat: Unregistered dataset for EG1-4, on fasted day, full session, processed for clustering/GLM
 - EG1-1_fasted_unreg_rSLDS.mat: Unregistered dataset for EG1-1, on fasted day, processed for rSLDS
 - EG1-4_fasted_unreg_male1_rSLDS.mat: Unregistered dataset for EG1-4, on fasted day, first male intruder only, processed for rSLDS
